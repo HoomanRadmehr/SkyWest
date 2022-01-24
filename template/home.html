@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} SkyWest {% endblock %}
+
+{% block content %}
+    <br>
+    <h1>
+        Sky West Web Application.
+    </h1>
+    <br>
+    <a href="{% url 'users:sign_up' %}">sign up</a>
+    <br>
+    <a href="{% url 'users:sign_in' %}">sign in</a>
+
+{% endblock %}
