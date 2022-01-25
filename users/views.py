@@ -1,10 +1,9 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from .forms import SignInForm , SignUpForm
-from verify_email.email_handler import send_verification_email
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
+from . tasks import send_verifiction_emai_task
 
 
 class Home(View):
@@ -41,7 +40,7 @@ class SignUp(View):
     def post(self,request):
         form = SignUpForm(data=request.POST)
         if form.is_valid():
-            send_verification_email(request, form)
+            send_verifiction_emai_task(request,form)
             messages.success(request, f"sending verify email to {form.cleaned_data['email']} email" )
             return render(request,template_name='home.html')
         else:

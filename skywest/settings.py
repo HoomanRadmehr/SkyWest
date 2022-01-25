@@ -71,6 +71,12 @@ MIDDLEWARE = [
 LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = 'admin:index'
 
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
 ROOT_URLCONF = 'skywest.urls'
 
 TEMPLATES = [
