@@ -22,9 +22,10 @@ class SignIn(View):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect("user:home")
+                if user.is_active:
+                    login(request, user)
+                    messages.info(request, f"You are now logged in as {username}.")
+                    return redirect("user:home")
             else:
                 messages.error(request,"Invalid username or password.")
                 return render(request,'users/sign_in.html',{'form':form},status=200)
